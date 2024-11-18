@@ -3,44 +3,73 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        // Simuler des données de prix pour 30 jours
-        List<Double> prices = List.of(
-            22.27, 22.19, 22.08, 22.17, 22.18, 22.13, 22.23, 22.43, 22.24, 22.29,
-            22.15, 22.39, 22.38, 22.61, 23.36, 24.05, 23.75, 23.83, 23.95, 23.63,
-            23.82, 23.87, 23.65, 23.19, 23.10, 23.33, 22.68, 23.10, 22.40, 22.17
-        );
-
+        // Simuler des données de prix pour 200 jours
+        List<Double> prices = new ArrayList<>();
+       for (int i = 0; i < 200; i++) {
+            prices.add(20 + Math.random() * 10); // Générer des prix aléatoires entre 20 et 30
+        }
+        
         // Utiliser les mêmes prix pour les prix de clôture dans cet exemple
         List<Double> closingPrices = new ArrayList<>(prices);
 
-        // Créer une instance d'IndicateurTechnique (assurez-vous d'avoir une implémentation)
-        IndicateurTechnique indicateurs = new IndicateurTechnique(); // Remplacez par votre constructeur approprié
+        // Créer des instances d'IndicateurTechnique en utilisant les méthodes statiques
+        IndicateurTechnique rsiIndicator = IndicateurTechnique.createRSI(closingPrices, 14);
+        IndicateurTechnique smaIndicator = IndicateurTechnique.createSMA(prices, 20);
+        IndicateurTechnique emaIndicator = IndicateurTechnique.createEMA(prices, 20);
+        IndicateurTechnique macdIndicator = IndicateurTechnique.createMACD(prices, 12, 26, 9);
+        IndicateurTechnique bollingerBandsIndicator = IndicateurTechnique.createBollingerBands(prices, 20, 2.0);
 
-        // Créer des instances de stratégies
-        StrategieRSI strategieRSI = new StrategieRSI(indicateurs);
-        StrategieMACD strategieMACD = new StrategieMACD(indicateurs);
-        StrategieMoyennesMobiles strategieMoyennesMobiles = new StrategieMoyennesMobiles(indicateurs);
-        StrategieTendance strategieTendance = new StrategieTendance(indicateurs);
-        StrategieBollinger strategieBollinger = new StrategieBollinger(indicateurs);
+        // Créer des instances de stratégies avec les indicateurs appropriés
+        StrategieRSI strategieRSI = new StrategieRSI(rsiIndicator);
+        StrategieMACD strategieMACD = new StrategieMACD(macdIndicator);
+        StrategieMoyennesMobiles strategieMoyennesMobiles = new StrategieMoyennesMobiles(smaIndicator);
+        StrategieTendance strategieTendance = new StrategieTendance(emaIndicator);
+        StrategieBollinger strategieBollinger = new StrategieBollinger(bollingerBandsIndicator);
 
         // Tester la stratégie RSI
-        String signalRSI = strategieRSI.executerAvecPrixCloture(closingPrices);
-        System.out.printf("Signal RSI: %s%n", signalRSI);
+        System.out.println("Test de la Stratégie RSI:");
+        try {
+            String signalRSI = strategieRSI.executerAvecPrixCloture(closingPrices);
+            System.out.printf("Signal RSI: %s%n", signalRSI);
+        } catch (Exception e) {
+            System.out.println("Erreur lors du test de la Stratégie RSI: " + e.getMessage());
+        }
 
         // Tester la stratégie MACD
-        String signalMACD = strategieMACD.executerAvecPrix(prices);
-        System.out.printf("Signal MACD: %s%n", signalMACD);
+        System.out.println("\nTest de la Stratégie MACD:");
+        try {
+            String signalMACD = strategieMACD.executerAvecPrix(prices);
+            System.out.printf("Signal MACD: %s%n", signalMACD);
+        } catch (Exception e) {
+            System.out.println("Erreur lors du test de la Stratégie MACD: " + e.getMessage());
+        }
 
         // Tester la stratégie Moyennes Mobiles
-        String signalMoyennesMobiles = strategieMoyennesMobiles.executerAvecPrix(prices);
-        System.out.printf("Signal Moyennes Mobiles: %s%n", signalMoyennesMobiles);
+        System.out.println("\nTest de la Stratégie Moyennes Mobiles:");
+        try {
+            String signalMoyennesMobiles = strategieMoyennesMobiles.executerAvecPrix(prices);
+            System.out.printf("Signal Moyennes Mobiles: %s%n", signalMoyennesMobiles);
+        } catch (Exception e) {
+            System.out.println("Erreur lors du test de la Stratégie Moyennes Mobiles: " + e.getMessage());
+        }
 
         // Tester la stratégie Tendance
-        String signalTendance = strategieTendance.executerAvecPrix(prices);
-        System.out.printf("Signal Tendance: %s%n", signalTendance);
+        System.out.println("\nTest de la Stratégie de Tendance:");
+        try {
+            String signalTendance = strategieTendance.executerAvecPrix(prices);
+            System.out.printf("Signal de Tendance: %s%n", signalTendance);
+        } catch (Exception e) {
+            System.out.println("Erreur lors du test de la Stratégie de Tendance: " + e.getMessage());
+        }
 
         // Tester la stratégie Bandes de Bollinger
-        String signalBollinger = strategieBollinger.executerAvecPrix(prices);
-        System.out.printf("Signal Bandes de Bollinger: %s%n", signalBollinger);
+        System.out.println("\nTest de la Stratégie Bandes de Bollinger:");
+        try {
+            String signalBollinger = strategieBollinger.executerAvecPrix(prices);
+            System.out.printf("Signal Bandes de Bollinger: %s%n", signalBollinger);
+        } catch (Exception e) {
+            System.out.println("Erreur lors du test de la Stratégie Bandes de Bollinger: " + e.getMessage());
+        }
     }
 }
+
