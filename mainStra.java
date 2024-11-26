@@ -1,23 +1,22 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class Main {
+public class MainStra {
     public static void main(String[] args) {
         // Simuler des données de prix pour 200 jours
-        List<Double> prices = new ArrayList<>();
+        List<Double> closingPrices = new ArrayList<>();
        for (int i = 0; i < 200; i++) {
             prices.add(20 + Math.random() * 10); // Générer des prix aléatoires entre 20 et 30
         }
         
-        // Utiliser les mêmes prix pour les prix de clôture dans cet exemple
-        List<Double> closingPrices = new ArrayList<>(prices);
+
 
         // Créer des instances d'IndicateurTechnique en utilisant les méthodes statiques
         IndicateurTechnique rsiIndicator = IndicateurTechnique.createRSI(closingPrices, 14);
-        IndicateurTechnique smaIndicator = IndicateurTechnique.createSMA(prices, 20);
-        IndicateurTechnique emaIndicator = IndicateurTechnique.createEMA(prices, 20);
-        IndicateurTechnique macdIndicator = IndicateurTechnique.createMACD(prices, 12, 26, 9);
-        IndicateurTechnique bollingerBandsIndicator = IndicateurTechnique.createBollingerBands(prices, 20, 2.0);
+        IndicateurTechnique smaIndicator = IndicateurTechnique.createSMA(closingPrices, 20);
+        IndicateurTechnique emaIndicator = IndicateurTechnique.createEMA(closingPrices, 20);
+        IndicateurTechnique macdIndicator = IndicateurTechnique.createMACD(closingPrices, 12, 26, 9);
+        IndicateurTechnique bollingerBandsIndicator = IndicateurTechnique.createBollingerBands(closingPrices, 20, 2.0);
 
         // Créer des instances de stratégies avec les indicateurs appropriés
         StrategieRSI strategieRSI = new StrategieRSI(rsiIndicator);
