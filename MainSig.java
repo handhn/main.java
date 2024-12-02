@@ -1,4 +1,4 @@
-public class Main {
+public class MainSig {
     public static void main(String[] args) {
         Signal signal = new Signal();
         String accessKey = "00c7ccc8fcb3802924b72ca162c11bed"; // Remplacez par votre clé d'accès réelle
