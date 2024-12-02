@@ -3,12 +3,13 @@ import java.util.ArrayList;
 
 public class MainStra {
     public static void main(String[] args) {
+    
         // Simuler des données de prix pour 200 jours
-        List<Double> closingPrices = new ArrayList<>();
-       for (int i = 0; i < 200; i++) {
-            prices.add(20 + Math.random() * 10); // Générer des prix aléatoires entre 20 et 30
-        }
         
+        List<Double> closingPrices = new ArrayList<>();
+        for (int i = 0; i < 200; i++) {
+            closingPrices.add(20 + Math.random() * 10); // Générer des prix aléatoires entre 20 et 30
+        }
 
 
         // Créer des instances d'IndicateurTechnique en utilisant les méthodes statiques
@@ -37,7 +38,7 @@ public class MainStra {
         // Tester la stratégie MACD
         System.out.println("\nTest de la Stratégie MACD:");
         try {
-            String signalMACD = strategieMACD.executerAvecPrix(prices);
+            String signalMACD = strategieMACD.executerAvecPrixCloture(closingPrices);
             System.out.printf("Signal MACD: %s%n", signalMACD);
         } catch (Exception e) {
             System.out.println("Erreur lors du test de la Stratégie MACD: " + e.getMessage());
@@ -46,7 +47,7 @@ public class MainStra {
         // Tester la stratégie Moyennes Mobiles
         System.out.println("\nTest de la Stratégie Moyennes Mobiles:");
         try {
-            String signalMoyennesMobiles = strategieMoyennesMobiles.executerAvecPrix(prices);
+            String signalMoyennesMobiles = strategieMoyennesMobiles.executerAvecPrixCloture(closingPrices);
             System.out.printf("Signal Moyennes Mobiles: %s%n", signalMoyennesMobiles);
         } catch (Exception e) {
             System.out.println("Erreur lors du test de la Stratégie Moyennes Mobiles: " + e.getMessage());
@@ -55,7 +56,7 @@ public class MainStra {
         // Tester la stratégie Tendance
         System.out.println("\nTest de la Stratégie de Tendance:");
         try {
-            String signalTendance = strategieTendance.executerAvecPrix(prices);
+            String signalTendance = strategieTendance.executerAvecPrixCloture(closingPrices);
             System.out.printf("Signal de Tendance: %s%n", signalTendance);
         } catch (Exception e) {
             System.out.println("Erreur lors du test de la Stratégie de Tendance: " + e.getMessage());
@@ -64,7 +65,7 @@ public class MainStra {
         // Tester la stratégie Bandes de Bollinger
         System.out.println("\nTest de la Stratégie Bandes de Bollinger:");
         try {
-            String signalBollinger = strategieBollinger.executerAvecPrix(prices);
+            String signalBollinger = strategieBollinger.executerAvecPrixCloture(closingPrices);
             System.out.printf("Signal Bandes de Bollinger: %s%n", signalBollinger);
         } catch (Exception e) {
             System.out.println("Erreur lors du test de la Stratégie Bandes de Bollinger: " + e.getMessage());
