@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class Main {
+public class MainIndic {
     public static void main(String[] args) {
         // Simuler des données de prix pour 30 jours
         List<Double> prices = List.of(
@@ -9,9 +9,6 @@ public class Main {
             22.15, 22.39, 22.38, 22.61, 23.36, 24.05, 23.75, 23.83, 23.95, 23.63,
             23.82, 23.87, 23.65, 23.19, 23.10, 23.33, 22.68, 23.10, 22.40, 22.17
         );
-
-        // Utiliser les mêmes prix pour les prix de clôture dans cet exemple
-        List<Double> closingPrices = new ArrayList<>(prices);
 
         // Paramètres pour les indicateurs
         int rsiPeriod = 14;
@@ -24,7 +21,7 @@ public class Main {
         double bollingerK = 2.0;
 
         // Calculer et afficher RSI
-        double rsi = RSICalculator.calculateRSI(closingPrices, rsiPeriod);
+        double rsi = RSICalculator.calculateRSI(prices, rsiPeriod);
         System.out.printf("RSI (%d périodes): %.2f%n", rsiPeriod, rsi);
 
         // Calculer et afficher SMA
